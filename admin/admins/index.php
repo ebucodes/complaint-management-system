@@ -194,20 +194,6 @@ include("../includes/session.php");
 ?>
 
 <?php include("../includes/scripts.php"); ?>
-
-<script>
-  $(function() {
-    $("#example1").DataTable({
-      "responsive": true,
-      "lengthChange": true,
-      "autoWidth": true,
-      "paging": true,
-      "ordering": true,
-      "info": true,
-      // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
-    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
-  })
-</script>
 <!-- Delete Admin -->
 <script>
   $('.btnDel').on('click', function(e) {
