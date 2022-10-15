@@ -16,7 +16,7 @@ A University-based complaint management system using Federal University of Techn
 - Download the zip file or clone the repository
 - Create a database table and name it your preferred name eg ebucodes_complaint
 - Import the complaint.sql file from the database folder to your database table.
-- Open the folder where the file is in your browser using http::localhost
+- Open the folder where the file is in your browser using **http::localhost**
 
 ## Login credentials
 
