@@ -90,7 +90,7 @@ include("../includes/config.php");
                   <div class="icon">
                     <i class="fas fa-comments"></i>
                   </div>
-                  <a href="../complaints/" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+                  <a href="../complaints/reports.php" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                 </div>
               </div>
               <!-- ./col -->
