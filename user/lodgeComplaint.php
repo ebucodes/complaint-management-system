@@ -6,7 +6,7 @@ include("includes/session.php");
 <?php
 include("includes/config.php");
 // Query to register complaint
-if (isset($_POST["lodgeComplaint"])) {
+if (isset($_POST["lodgeComplaint"]) && !empty($_FILES["file"]["name"])) {
   $complaintID = mt_rand(10000, 9999999);
   $userID =  $_SESSION['userID'];
   $category = $_POST["category"];
@@ -14,33 +14,27 @@ if (isset($_POST["lodgeComplaint"])) {
   $complaintType = $_POST["complaintType"];
   $complaintTitle = $_POST["complaintTitle"];
   $complaintDetails = $_POST["complaintDetails"];
-  $docs = $_FILES["file"]["name"];
   $complaintVisibility = $_POST["complaintVisibility"];
   $status = 'Open';
-  $complaintDate = date('d/m/Y');
+  $complaintDate = date('Y-m-d');
 
-  if (!empty($docs)) {
-    move_uploaded_file($_FILES['files']['tmp_name'], '../assets/images/' . $docs);
-  }
-  $query = mysqli_query($conn, "INSERT INTO complaint (complaintID, userID, category, subcategory, complaintType, complaintTitle, complaintDetails, complaintFiles, complaintVisibility, status, complaintDate) VALUES ('$complaintID','$userID','$category','$subcategory', '$complaintType', '$complaintTitle', '$complaintDetails', '$docs', '$complaintVisibility', '$status','$complaintDate')") or die(mysqli_error($conn));
-  if ($query) {
-?>
-    <script>
-      setTimeout(function() {
-          swal("Success", "Complaint number <?php echo $complaintID; ?> has been registered!!!", "success");
-        },
-        100);
-    </script>
-  <?php
+  $targetDir = "/assets/images/uploads/";
+  $fileName = basename($_FILES["file"]["name"]);
+  $targetFilePath = $targetDir . $fileName;
+  // $fileType = pathinfo($targetFilePath, PATHINFO_EXTENSION);
+  if (!empty($fileName)) {
+    move_uploaded_file($_FILES['file']['name'], $targetFilePath);
   } else {
-  ?>
-    <script>
-      setTimeout(function() {
-          swal("Error!", "Not successful", "error");
-        },
-        100);
-    </script>
-<?php
+    $fileName = 'No documents available';
+  }
+
+  $query = mysqli_query($conn, "INSERT INTO complaint 
+  (complaintID, userID, category, subcategory, complaintType, complaintTitle, complaintDetails, complaintFiles, complaintVisibility, status, complaintDate) VALUES 
+  ('$complaintID','$userID','$category','$subcategory', '$complaintType', '$complaintTitle', '$complaintDetails', '$fileName', '$complaintVisibility', '$status','$complaintDate')") or die(mysqli_error($conn));
+  if ($query) {
+    echo "<script>alert('Your complaint has been sent.')</script>";
+  } else {
+    echo "<script>alert('Complaint not sent.')</script>";
   }
 }
 ?>
@@ -88,7 +82,7 @@ if (isset($_POST["lodgeComplaint"])) {
               <h3 class="card-title"><i class="fas fa-user"></i>&nbsp;<?php echo $user_info["fullName"]; ?>'s Profile</h3>
             </div>
             <!-- /.card-header -->
-            <form id="lodgeComplaint" method="post">
+            <form id="lodgeComplaint" method="post" enctype="multipart/form-data">
               <div class="card-body">
                 <div class="row">
                   <div class="col-md-6">
@@ -125,7 +119,6 @@ if (isset($_POST["lodgeComplaint"])) {
                       </select>
                     </div>
                     <!-- /.form-group -->
-                    <!-- /.form-group -->
                     <div class="form-group">
                       <label>Complaint Title</label>&nbsp;<span style='color: red;'>*</span>
                       <input type="text" name="complaintTitle" id="" class="form-control" required>
@@ -152,8 +145,8 @@ if (isset($_POST["lodgeComplaint"])) {
                   <div class="col-12 col-sm-6">
                     <div class="form-group">
                       <label>Complaint File(s)</label>
-                      <small>(If there is any proof or related to support your complaint)</small>
-                      <input type="file" name="file" class="form-control">
+                      <small>(If there is any proof or related to support your complaint-screenshots/images only)</small>
+                      <input type="file" name="file" accept="image/*" class="form-control">
                     </div>
                     <!-- /.form-group -->
                   </div>

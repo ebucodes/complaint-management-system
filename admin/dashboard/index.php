@@ -172,6 +172,7 @@ include("../includes/config.php");
             <!-- /.row (main row) -->
           </div><!-- /.container-fluid -->
         </section>
+        <!--  -->
         <section class="content">
           <div class="container-fluid">
             <div class="row">

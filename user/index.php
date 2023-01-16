@@ -41,8 +41,8 @@ if (isset($_POST["login"])) {
   <title>FUTO Complaint Centre | User Login </title>
 
   <!-- Bootstrap core CSS -->
-  <link href="../assets/css/bootstrap.min.css" rel="stylesheet">
-
+  <!-- <link href="../assets/css/bootstrap.min.css" rel="stylesheet"> -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" integrity="sha256-wLz3iY/cO4e6vKZ4zRmo4+9XDpMcgKOvv/zEU3OMlRo=" crossorigin="anonymous">
   <style>
     .bd-placeholder-img {
       font-size: 1.125rem;
