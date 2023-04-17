@@ -6,7 +6,7 @@ include("includes/session.php");
 <?php
 include("includes/config.php");
 // Query to register complaint
-if (isset($_POST["lodgeComplaint"]) && !empty($_FILES["file"]["name"])) {
+if (isset($_POST["lodgeComplaint"])) {
   $complaintID = mt_rand(10000, 9999999);
   $userID =  $_SESSION['userID'];
   $category = $_POST["category"];
