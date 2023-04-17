@@ -8,8 +8,8 @@ include("includes/config.php");
 // Edit User
 if (isset($_POST["editProfile"])) {
   $fullName = $_POST["fullName"];
-  $faculty = $_POST["faculty"];
-  $department = $_POST["department"];
+  // $faculty = $_POST["faculty"];
+  // $department = $_POST["department"];
   $phoneNumber = $_POST["phoneNumber"];
   $emailAddress = $_POST["emailAddress"];
   $level = $_POST["level"];
